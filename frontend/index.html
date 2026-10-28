@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Complaint Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="OCMS Home">
+        <span class="brand-mark">C</span>
+        <span><strong>Resolve</strong><small>COMPLAINT PORTAL</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-list">
+        <button class="nav-item active" data-page="dashboard"><span class="nav-icon">▦</span> Dashboard</button>
+        <button class="nav-item" data-page="complaints"><span class="nav-icon">☷</span> My Complaints</button>
+        <button class="nav-item" data-page="new"><span class="nav-icon">＋</span> Submit a Complaint</button>
+        <button class="nav-item" data-page="notifications"><span class="nav-icon">♧</span> Notifications <i id="notificationCount">2</i></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <div class="help-icon">?</div>
+          <strong>Need some help?</strong>
+          <p>Our support team is here to help you get things resolved.</p>
+          <button id="helpBtn" class="help-link">Contact support <span>↗</span></button>
+        </div>
+        <button class="profile" id="profileBtn">
+          <span class="avatar">SF</span>
+          <span class="profile-text"><strong>Sham Francis</strong><small>Citizen account</small></span>
+          <span class="dots">•••</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Workspace</span><b>/</b><strong id="breadcrumbTitle">Dashboard</strong></div>
+        <div class="top-actions">
+          <span class="today" id="todayLabel"></span>
+          <button class="icon-button" id="topNotifications" aria-label="Notifications">♧<em></em></button>
+          <span class="avatar small">SF</span>
+        </div>
+      </header>
+
+      <section class="page active" id="page-dashboard">
+        <div class="welcome-row">
+          <div><p class="eyebrow">YOUR SPACE, YOUR VOICE</p><h1>Good morning, Sham <span class="wave">✦</span></h1><p class="muted">Here’s what’s happening with your complaints today.</p></div>
+          <button class="primary-btn" data-go="new"><span>＋</span> New complaint</button>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span class="stat-label">Total complaints</span><span class="stat-icon blue">☷</span></div><div class="stat-number" id="totalStat">08</div><div class="stat-foot"><span class="tiny-dot blue-dot"></span> All submitted complaints</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-label">In progress</span><span class="stat-icon amber">◷</span></div><div class="stat-number" id="progressStat">03</div><div class="stat-foot"><span class="tiny-dot amber-dot"></span> Currently being handled</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-label">Resolved</span><span class="stat-icon green">✓</span></div><div class="stat-number" id="resolvedStat">04</div><div class="stat-foot"><span class="tiny-dot green-dot"></span> Successfully completed</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-label">Needs attention</span><span class="stat-icon red">!</span></div><div class="stat-number" id="attentionStat">01</div><div class="stat-foot"><span class="tiny-dot red-dot"></span> Awaiting an update</div></article>
+        </div>
+
+        <div class="content-grid">
+          <section class="panel recent-panel">
+            <div class="panel-heading"><div><h2>Recent complaints</h2><p class="muted">Track the latest updates on your requests.</p></div><button class="text-btn" data-go="complaints">View all <span>→</span></button></div>
+            <div class="table-wrap"><table><thead><tr><th>COMPLAINT</th><th>CATEGORY</th><th>DATE SUBMITTED</th><th>STATUS</th><th></th></tr></thead><tbody id="recentRows"></tbody></table></div>
+          </section>
+          <section class="panel quick-panel">
+            <div class="panel-heading"><div><h2>Quick actions</h2><p class="muted">What would you like to do?</p></div></div>
+            <button class="quick-action" data-go="new"><span class="quick-icon purple">＋</span><span><strong>Submit a complaint</strong><small>Report a new issue or concern</small></span><b>→</b></button>
+            <button class="quick-action" data-go="complaints"><span class="quick-icon teal">⌕</span><span><strong>Track a complaint</strong><small>Check progress and status</small></span><b>→</b></button>
+            <button class="quick-action" data-go="notifications"><span class="quick-icon orange">♧</span><span><strong>View notifications</strong><small>See the latest updates</small></span><b>→</b></button>
+            <div class="response-note"><span>✦</span><div><strong>Every voice matters.</strong><p>Your feedback helps us improve our services for everyone.</p></div></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="page" id="page-complaints">
+        <div class="page-heading"><div><p class="eyebrow">COMPLAINT CENTRE</p><h1>My complaints</h1><p class="muted">All your reported issues in one place.</p></div><button class="primary-btn" data-go="new">＋ New complaint</button></div>
+        <section class="panel">
+          <div class="filter-row"><div class="search-box"><span>⌕</span><input id="searchInput" placeholder="Search by ID, title or category..." /></div><select id="statusFilter"><option value="All">All statuses</option><option>Submitted</option><option>Under Review</option><option>Assigned</option><option>In Progress</option><option>Resolved</option><option>Closed</option><option>Escalated</option></select></div>
+          <div class="table-wrap"><table><thead><tr><th>COMPLAINT</th><th>CATEGORY</th><th>DATE SUBMITTED</th><th>PRIORITY</th><th>STATUS</th><th>ASSIGNED TO</th></tr></thead><tbody id="allRows"></tbody></table></div>
+          <div class="table-footer"><span id="resultCount">Showing 0 complaints</span><span>Updates are saved in this browser demo</span></div>
+        </section>
+      </section>
+
+      <section class="page" id="page-new">
+        <div class="page-heading"><div><p class="eyebrow">WE’RE HERE TO LISTEN</p><h1>Submit a complaint</h1><p class="muted">Tell us what happened. We’ll make sure it reaches the right team.</p></div></div>
+        <div class="form-layout">
+          <section class="panel form-panel">
+            <div class="form-title"><span class="step-number">01</span><div><h2>Complaint details</h2><p class="muted">Fields marked with * are required.</p></div></div>
+            <form id="complaintForm">
+              <label for="category">Complaint category <span>*</span></label>
+              <select id="category" required><option value="">Choose a category</option><option>Water Supply</option><option>Electricity</option><option>Road Maintenance</option><option>Sanitation</option><option>Billing Issues</option><option>Other</option></select>
+              <label for="title">Complaint title <span>*</span></label>
+              <input id="title" required maxlength="90" placeholder="e.g. Streetlight not working near my street" />
+              <label for="description">Describe your issue <span>*</span></label>
+              <textarea id="description" required rows="5" maxlength="1200" placeholder="Include the location, what happened, and any details that may help us resolve it..."></textarea>
+              <div class="form-hint"><span>ⓘ</span> Please avoid sharing passwords or other sensitive personal information.</div>
+              <label for="location">Location / address <small>(optional)</small></label>
+              <input id="location" placeholder="Street, area or landmark" />
+              <div class="form-actions"><button type="button" class="secondary-btn" data-go="dashboard">Cancel</button><button type="submit" class="primary-btn">Submit complaint <span>→</span></button></div>
+            </form>
+          </section>
+          <aside class="side-info">
+            <div class="info-card dark-info"><span class="info-spark">✦</span><h3>What happens next?</h3><div class="timeline"><div class="timeline-item"><span>1</span><div><strong>We receive your complaint</strong><p>You’ll get a unique reference number.</p></div></div><div class="timeline-item"><span>2</span><div><strong>It reaches the right team</strong><p>We assign a priority based on your issue.</p></div></div><div class="timeline-item"><span>3</span><div><strong>You stay informed</strong><p>Track status changes in your dashboard.</p></div></div></div></div>
+            <div class="info-card light-info"><div class="light-icon">◷</div><h3>Estimated response time</h3><p>High priority: within 24 hours<br>Medium priority: within 48 hours<br>Low priority: within 4 days</p><small>Actual response times may vary.</small></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="page" id="page-notifications">
+        <div class="page-heading"><div><p class="eyebrow">STAY IN THE LOOP</p><h1>Notifications</h1><p class="muted">Updates about your complaints and their progress.</p></div><button class="secondary-btn" id="markReadBtn">Mark all as read</button></div>
+        <section class="panel notification-panel" id="notificationList"></section>
+      </section>
+      <footer><span>© 2026 Resolve Complaint Portal</span><span>Built for better service, one resolution at a time.</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast"><span>✓</span><p id="toastText">Saved successfully</p></div>
+  <script src="script.js"></script>
+</body>
+</html>
