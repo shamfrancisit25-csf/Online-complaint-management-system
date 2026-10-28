@@ -1,0 +1,10 @@
+com\resolve\ocms\OnlineComplaintManagementApplication.class
+com\resolve\ocms\repository\NotificationRepository.class
+com\resolve\ocms\controller\ComplaintController.class
+com\resolve\ocms\controller\NotificationController.class
+com\resolve\ocms\config\SeedData.class
+com\resolve\ocms\service\PriorityService.class
+com\resolve\ocms\config\WebConfig.class
+com\resolve\ocms\model\AppNotification.class
+com\resolve\ocms\model\Complaint.class
+com\resolve\ocms\repository\ComplaintRepository.class
